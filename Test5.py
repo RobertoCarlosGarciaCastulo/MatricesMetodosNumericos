@@ -1,0 +1,27 @@
+from numpy  import* 
+from Lineal import*
+a=array([[5,-3,1],[2,4,-1],[2,-3,8]],float)
+print ("")
+b=array([[5],[6],[4]],float)
+print ("")
+x= array([[1],[1],[1]],float)
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+x=jacobi(a,b,x);print (x)
+print ("")
+
+

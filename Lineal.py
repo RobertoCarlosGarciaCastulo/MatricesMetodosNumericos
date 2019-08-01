@@ -50,8 +50,8 @@ def inversa(a,b):
 	print (c)
 	Inv=c[:,n+1]
 	return Inv
-
-def gauss1(a,b):
+	
+def Gauss1(a,b):
 	n=len(b)
 	c=np.concatenate([a,b],axis=1)
 	for e in range(n):
@@ -59,14 +59,62 @@ def gauss1(a,b):
 		for j in range(e,n+1):
 			c[e,j]=c[e,j]/t
 		for i in range(e+1,n):
-			t=c[i,e]
-			for j in range(e,n+1):
-				c[i,j]=c[i,j]-t*c[e,j]	
+				t=c[i,e]
+				for j in range(e,n+1):
+					c[i,j]=c[i,j]-t*c[e,j]
+	print(c)
 	x=np.zeros([n,1])
-	x[n-1]=c[c-1,n]
+	x[n-1]=c[n-1,n]
 	for i in range(n-2,-1,-1):
-		s=0
-		for j in range (i+1,n):
+		s = 0
+		for j in range(i+1,n):
 			s=s+c[i,j]*x[j]
-		 x[i]=c[i,n]-s
+		x[i]=c[i,n]-s
 	return x
+
+
+def jacobi(a,b,x):
+	n=len(x)
+	t=x.copy()
+	for i in range(n):
+		s=0
+		for j in range(n):
+			if i!=j:
+				s=s+a[i,j]*t[j]
+		x[i]=(b[i]-s)/a[i,i]
+	return x
+	
+def jacobim(a,b,x,e,m):
+	n=len(x)
+	t=x.copy()
+	for k in range(m):
+		x=jacobi(a,b,x)
+		d=np.linalg.norm(np.array(x)-np.array(t))
+		if d<e:
+			return [x,k]
+		else:
+			t=x.copy()
+	return [[],m]
+	
+def gausseideal(a,b,x):
+	n=len(x)
+	for i in range(n):
+		s = 0
+		for j in range(n):
+			if i!=j:
+				s=s+a[i,j]*x[j]
+		x[i]=(b[i]-s)/a[i,j]
+	return x
+	
+def gausseidealm(a,b,x,e,m):
+	n=len(x)
+	t=x.copy()
+	for k in range(m):
+		x=gausseideal(a,b,x)
+		d=np.linalg.norm(np.array(x)-np.array(t))
+		if d<e:
+			return [x,k]
+		else:
+			t=x.copy()
+	return [[],m]
+	
